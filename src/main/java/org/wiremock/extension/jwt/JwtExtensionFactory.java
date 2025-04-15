@@ -13,10 +13,11 @@ public class JwtExtensionFactory implements ExtensionFactory {
         final Admin admin = services.getAdmin();
         final JwtSigningKeySettings jwtSigningKeySettings = new JwtSigningKeySettings(admin);
         final JwtInitialiser jwtInitialiser = new JwtInitialiser(jwtSigningKeySettings);
-
+        final JwtBodySigningTransformer jwtBodySigningTransformer = new JwtBodySigningTransformer(jwtSigningKeySettings);
         return List.of(
                 jwtSigningKeySettings,
                 jwtInitialiser,
+                jwtBodySigningTransformer,
                 new JwtHelpersExtension(jwtSigningKeySettings)
         );
     }
