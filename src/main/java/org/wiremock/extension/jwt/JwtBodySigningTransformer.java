@@ -1,15 +1,12 @@
 package org.wiremock.extension.jwt;
 
-import com.github.tomakehurst.wiremock.extension.Parameters;
 import com.github.tomakehurst.wiremock.extension.ResponseTransformerV2;
 import com.github.tomakehurst.wiremock.http.*;
-import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.github.tomakehurst.wiremock.stubbing.ServeEvent;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.Date;
 
 public class JwtBodySigningTransformer implements ResponseTransformerV2 {
 
@@ -64,5 +61,10 @@ public class JwtBodySigningTransformer implements ResponseTransformerV2 {
 
     private static String base64urlEncode(byte[] bytes) {
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+    }
+
+    @Override
+    public boolean applyGlobally() {
+        return false;
     }
 }
